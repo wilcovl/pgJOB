@@ -39,6 +39,9 @@ See for details: https://neo4j.com/docs/operations-manual/current/tutorial/neo4j
 bin\neo4j-admin.bat import --database=neo4j --id-type=STRING --ignore-empty-strings --nodes=import/akaName.csv --nodes=import/akaTitle.csv --nodes=import/castInfoVertices.csv --nodes=import/character.csv --nodes=import/company_name.csv --nodes=import/complCastInfoVertices.csv --nodes=import/infoVertices.csv --nodes=import/keyword.csv --nodes=import/person.csv --nodes=import/personInfoVertices.csv --nodes=import/titles.csv --relationships=import/akaNameEdges.csv --relationships=import/akaTitleEdges.csv --relationships=import/castInfoEdges.csv --relationships=import/complCastInfoEdges.csv --relationships=import/episodeOfEdges.csv --relationships=import/infoEdges.csv --relationships=import/keywordEdges.csv --relationships=import/linkTypeEdges.csv --relationships=import/movie_companies.csv --relationships=import/personInfoEdges.csv
 ```
 
+## Problems
+If you find any problem, please create an issue.
+
 
 
 
