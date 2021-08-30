@@ -1,0 +1,23 @@
+MATCH (t:title)-[]->(c:company),
+		(t)-[:has_keyword]->(k:keyword),
+		(t)-[:genres]->(mi:movieInfo),
+		(t)-[:votes]->(miIdx:movieInfoIdx),
+		(ci:cast_info)-[:cast_info_movie]->(t),
+		(ci)-[:cast_info_person]->(p:person)
+WHERE ci.note IN ['(writer)',
+                  '(head writer)',
+                  '(written by)',
+                  '(story)',
+                  '(story editor)']
+	AND c.name STARTS WITH 'Lionsgate'
+	AND k.keyword IN ['murder',
+                    'violence',
+                    'blood',
+                    'gore',
+                    'death',
+                    'female-nudity',
+                    'hospital']
+	AND mi.info IN ['Horror',
+                  'Thriller']
+	AND p.gender = 'm'
+RETURN mi.info, miIdx.info, p.name, t.title

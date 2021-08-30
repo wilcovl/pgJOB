@@ -1,0 +1,14 @@
+MATCH (t:title)-[]->(c:company),
+		(t)-[:`release dates`]->(mi:movieInfo),
+		(ci:cast_info)-[:cast_info_movie]->(t),
+		(ci)-[:cast_info_person]->(p:person)-[:aka_name]->(:aka_name),
+		(ci)-[:cast_info_character]->(:character)
+WHERE ci.note IN ['(voice)', '(voice: Japanese version)', '(voice) (uncredited)', '(voice: English version)']
+	AND c.country_code = '[us]'
+	AND mi.info IS NOT NULL
+	AND (mi.info =~ 'Japan:.*200.*' OR mi.info =~ 'USA:.*200.*')
+	AND p.gender = 'f'
+	AND p.name CONTAINS 'An'
+	AND ci.role = 'actress'
+	AND t.production_year > 2000
+RETURN p.name, t.title

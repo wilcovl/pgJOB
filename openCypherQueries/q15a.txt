@@ -1,0 +1,11 @@
+MATCH (t:title)-[mc]->(c:company), 
+		(t)-[:has_keyword]->(k:keyword), 
+		(t)-[miEdge:`release dates`]->(mi:movieInfo), 
+		(t)-[:aka_title]->(:aka_title)
+WHERE c.country_code='[us]'
+	AND mc.note =~ '.*(200.*).*'
+	AND mc.note CONTAINS '(worldwide)'
+	AND miEdge.note CONTAINS 'internet'
+	AND mi.info =~ 'USA:.* 200.*'
+	AND t.production_year > 2000
+RETURN mi.info, t.title

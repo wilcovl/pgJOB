@@ -1,0 +1,12 @@
+MATCH (t:title)-[:genres]->(mi:movieInfo),
+		(t)-[:rating]->(miIdx:movieInfoIdx),
+		(t)<-[:cast_info_movie]-(ci:cast_info)-[:cast_info_person]->(p:person)
+WHERE ci.note IN ['(writer)','(head writer)','(written by)','(story)','(story editor)']
+	AND mi.info IN ['Horror','Thriller']
+	AND mi.note IS NULL
+	AND miIdx.info > '8.0'
+	AND p.gender IS NOT NULL
+	AND p.gender = 'f'
+	AND t.production_year >= 2008
+	AND t.production_year <= 2014
+RETURN mi.info, miIdx.info, t.title

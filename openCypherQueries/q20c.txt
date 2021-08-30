@@ -1,0 +1,22 @@
+MATCH (t:title)-[:has_keyword]->(k:keyword),
+		(ci:cast_info)-[:cast_info_movie]->(t),
+		(ci)-[:cast_info_person]->(p:person),
+		(ci)-[:cast_info_character]->(ch:character),
+		(cc:complete_cast)-[:complete_cast_movie]->(t)
+WHERE cc.subject = 'cast'
+	AND cc.status CONTAINS 'complete'
+	AND ch.name IS NOT NULL
+	AND (ch.name CONTAINS 'man' OR ch.name CONTAINS 'Man')
+	AND k.keyword IN ['superhero',
+                    'marvel-comics',
+                    'based-on-comic',
+                    'tv-special',
+                    'fight',
+                    'violence',
+                    'magnet',
+                    'web',
+                    'claw',
+                    'laser']
+	AND t.kind = 'movie'
+	AND t.production_year > 2000
+RETURN p.name, t.title

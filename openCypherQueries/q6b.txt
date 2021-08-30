@@ -1,0 +1,5 @@
+MATCH (nPers:person)<-[:cast_info_person]-(:cast_info)-[:cast_info_movie]->(nTitle:title)-[kw:has_keyword]->(nKw:keyword) 
+WHERE nKw.keyword IN ['superhero','sequel','second-part','marvel-comics','based-on-comic','tv-special','fight','violence']
+	AND nPers.name =~ '.*Downey.*Robert.*'
+	AND nTitle.production_year>2014 
+RETURN nKw.keyword, nPers.name, nTitle.title

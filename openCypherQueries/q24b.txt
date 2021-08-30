@@ -1,0 +1,24 @@
+MATCH (t:title)-[]->(c:company),
+	(t)-[:has_keyword]->(k:keyword),
+	(t)-[:`release dates`]->(mi:movieInfo),
+	(ci:cast_info)-[:cast_info_movie]->(t),
+	(ci)-[:cast_info_person]->(p:person)-[:aka_name]->(:aka_name),
+	(ci)-[:cast_info_character]->(ch:character)
+WHERE ci.note IN ['(voice)',
+                  '(voice: Japanese version)',
+                  '(voice) (uncredited)',
+                  '(voice: English version)']
+	AND c.country_code = '[us]'
+	AND c.name = 'DreamWorks Animation'
+	AND k.keyword IN ['hero',
+                    'martial-arts',
+                    'hand-to-hand-combat',
+					'computer-animated-movie']
+	AND mi.info IS NOT NULL
+	AND (mi.info =~ 'Japan:.*201.*' OR mi.info =~ 'USA:.*201.*')
+	AND p.gender = 'f'
+	AND p.name CONTAINS 'An'
+	AND ci.role = 'actress'
+	AND t.production_year > 2010
+	AND t.title STARTS WITH 'Kung Fu Panda'
+RETURN ch.name, p.name, t.title

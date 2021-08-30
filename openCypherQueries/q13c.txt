@@ -1,0 +1,8 @@
+MATCH (t:title)-[:`production companies`]->(c:company),
+		(t)-[:`release dates`]->(mi:movieInfo),
+		(t)-[:rating]->(miIdx:movieInfoIdx)
+WHERE c.country_code = '[us]'
+	AND t.kind = 'movie'
+	AND t.title <> ''
+	AND (t.title STARTS WITH 'Champion' OR t.title STARTS WITH 'Loser')
+RETURN c.name, miIdx.info, t.title

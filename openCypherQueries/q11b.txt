@@ -1,0 +1,10 @@
+MATCH (c:company)<-[mc:`production companies`]-(t:title)-[:has_keyword]->(k:keyword), 
+		(t)-[lt:movie_link]->(:title) 
+WHERE c.country_code <> '[pl]' 
+	AND (c.name CONTAINS 'Film' OR c.name CONTAINS 'Warner')
+	AND k.keyword = 'sequel' 
+	AND lt.type CONTAINS 'follows'
+	AND mc.note IS NULL
+	AND t.production_year = 1998
+	AND t.title CONTAINS 'Money'
+RETURN c.name, lt.type, t.title

@@ -1,0 +1,5 @@
+MATCH (n1:movieInfo)<-[]-(n2:title)-[:has_keyword]->(n3:keyword) 
+WHERE n3.keyword CONTAINS "sequel" 
+	AND n1.info IN ['Sweden','Norway','Germany','Denmark','Swedish','Denish','Norwegian','German'] 
+	AND n2.production_year>2005 
+RETURN n2.title

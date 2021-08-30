@@ -1,0 +1,7 @@
+MATCH (t:title)-[:genres]->(mi:movieInfo),
+		(t)-[:votes]->(miIdx:movieInfoIdx),
+		(t)<-[:cast_info_movie]-(ci:cast_info)-[:cast_info_person]->(p:person)
+WHERE ci.note IN ['(writer)','(head writer)','(written by)','(story)','(story editor)']
+	AND mi.info IN ['Horror','Action','Sci-Fi','Thriller','Crime','War']
+	AND p.gender = 'm'
+RETURN mi.info, miIdx.info, t.title

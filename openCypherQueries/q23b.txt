@@ -1,0 +1,15 @@
+MATCH (t:title)-[]->(c:company),
+		(t)-[:has_keyword]->(k:keyword),
+		(t)-[miEdge:`release dates`]->(mi:movieInfo),
+		(cc:complete_cast)-[:complete_cast_movie]->(t)
+WHERE cc.status = 'complete+verified'
+	AND c.country_code = '[us]'
+	AND k.keyword IN ['nerd',
+                    'loner',
+                    'alienation',
+                    'dignity']
+	AND t.kind IN ['movie']
+	AND miEdge.note CONTAINS 'internet'
+	AND mi.info =~ 'USA:.* 200.*'
+	AND t.production_year > 2000
+RETURN t.kind, t.title

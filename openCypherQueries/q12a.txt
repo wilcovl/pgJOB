@@ -1,0 +1,8 @@
+MATCH (t:title)-[:`production companies`]->(c:company),
+		(t)-[:genres]->(mi:movieInfo),
+		(t)-[:rating]->(miIdx:movieInfoIdx)
+WHERE t.production_year >= 2005 AND t.production_year <= 2008
+	AND c.country_code = '[us]'
+	AND mi.info IN ['Drama','Horror']
+	AND miIdx.info > '8.0'
+RETURN c.name, miIdx.info, t.title

@@ -1,0 +1,8 @@
+MATCH (t:title)-[]->(c:company), 
+		(t)-[:has_keyword]->(k:keyword),
+		(t)<-[:cast_info_movie]-(ci:cast_info)-[:cast_info_person]->(:person)-[:aka_name]->(an:aka_name)
+WHERE c.country_code = '[us]'
+	AND k.keyword = 'character-name-in-title'
+	AND t.episode_nr >= 50
+	AND t.episode_nr < 100
+RETURN an.name, t.title

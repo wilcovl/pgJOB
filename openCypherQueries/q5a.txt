@@ -1,0 +1,5 @@
+MATCH (nInfo:movieInfo)<-[]-(nTitle:title)-[eProdComp:`production companies`]->(nComp:company) 
+WHERE nTitle.production_year>2005 
+	AND eProdComp.note CONTAINS '(theatrical)' AND eProdComp.note CONTAINS '(France)' 
+	AND nInfo.info IN ['Sweden','Norway','Germany','Denmark','Swedish','Denish','Norwegian','German'] 
+RETURN nTitle.title

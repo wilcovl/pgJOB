@@ -1,0 +1,10 @@
+MATCH (:title)-[ml:movie_link]->(t:title)<-[:cast_info_movie]-(:cast_info)-[:cast_info_person]->(nPers:person)-[eBio:`mini biography`]->(pi:personInfo), (nPers)-[:aka_name]->(nAkaName:aka_name) 
+WHERE t.production_year>=1980 AND t.production_year<=2010
+	AND nPers.name_pcode_cf >= 'A' AND nPers.name_pcode_cf <= 'F' 
+	AND (nPers.gender = 'm' OR nPers.gender = 'f') 
+	AND (nPers.gender = 'm' OR nPers.name STARTS WITH 'A') 
+	AND eBio.note IS NOT NULL 
+	AND nAkaName.name IS NOT NULL
+	AND (nAkaName.name CONTAINS 'a' OR nAkaName.name STARTS WITH 'A') 
+	AND ml.type in ['references','referenced in','features','featured in']
+RETURN nPers.name, pi.info 

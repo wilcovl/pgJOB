@@ -1,0 +1,4 @@
+MATCH((n2:company)<-[e1:`production companies`]-(n1:title)-[e2:`bottom 10 rank`]->(n3:movieInfoIdx)) 
+WHERE (NOT e1.note CONTAINS "(as Metro-Goldwyn-Mayer Pictures)") 
+	AND n1.production_year > 2000 
+RETURN e1.note, n1.title, n1.production_year

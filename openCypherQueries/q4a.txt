@@ -1,0 +1,5 @@
+MATCH (n1:movieInfoIdx)<-[e1:rating]-(n2:title)-[:has_keyword]->(n3:keyword) 
+WHERE n3.keyword CONTAINS "sequel" 
+	AND n1.info>'5.0' 
+	AND n2.production_year>2005 
+RETURN n1.info, n2.title

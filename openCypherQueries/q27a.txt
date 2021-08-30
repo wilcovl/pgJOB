@@ -1,0 +1,20 @@
+MATCH (t:title)-[mc:`production companies`]->(c:company),
+		(t)-[:has_keyword]->(k:keyword),
+		(cc:complete_cast)-[:complete_cast_movie]->(t),
+		(t)-[ml:movie_link]->(:title),
+		(t)-[]->(mi:movieInfo)
+WHERE cc.subject IN ['cast',
+                    'crew']
+	AND cc.status = 'complete'
+	AND c.country_code <> '[pl]'
+	AND (c.name CONTAINS 'Film' OR c.name CONTAINS 'Warner')
+	AND k.keyword = 'sequel'
+	AND ml.type CONTAINS 'follow'
+	AND mc.note IS NULL
+	AND mi.info IN ['Sweden',
+                  'Germany',
+                  'Swedish',
+                  'German']
+	AND t.production_year >= 1950
+	AND t.production_year <= 2000
+RETURN c.name, ml.type, t.title

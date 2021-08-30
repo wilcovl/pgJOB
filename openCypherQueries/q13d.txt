@@ -1,0 +1,4 @@
+MATCH (t:title)-[:`production companies`]->(c:company),(t)-[:`release dates`]->(mi:movieInfo),(t)-[:rating]->(miIdx:movieInfoIdx)
+WHERE c.country_code = '[us]'
+	AND t.kind = 'movie'
+RETURN c.name, miIdx.info, t.title

@@ -1,0 +1,26 @@
+MATCH (t:title)-[:has_keyword]->(k:keyword),
+		(t)-[:genres]->(mi:movieInfo),
+		(t)-[:votes]->(miIdx:movieInfoIdx),
+		(cc:complete_cast)-[:complete_cast_movie]->(t),
+		(ci:cast_info)-[:cast_info_movie]->(t),
+		(ci)-[:cast_info_person]->(p:person)
+WHERE cc.subject IN ['cast',
+                    'crew']
+	AND cc.status = 'complete+verified'
+	AND ci.note IN ['(writer)',
+                  '(head writer)',
+                  '(written by)',
+                  '(story)',
+                  '(story editor)']
+	AND k.keyword IN ['murder',
+                    'violence',
+                    'blood',
+                    'gore',
+                    'death',
+                    'female-nudity',
+                    'hospital']
+	AND mi.info IN ['Horror',
+                  'Thriller']
+	AND p.gender = 'm'
+	AND t.production_year > 2000
+RETURN mi.info, miIdx.info, p.name, t.title

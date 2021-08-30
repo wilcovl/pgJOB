@@ -1,0 +1,9 @@
+MATCH (:title)-[ml:movie_link]->(t:title)<-[:cast_info_movie]-(:cast_info)-[:cast_info_person]->(nPers:person)-[eBio:`mini biography`]->(:personInfo), (nPers)-[:aka_name]->(nAkaName:aka_name) 
+WHERE t.production_year>=1980 AND t.production_year<=1984
+	AND eBio.note='Volker Boehm' 
+	AND nPers.name_pcode_cf STARTS WITH 'D' 
+	AND nPers.gender = 'm'
+	AND nAkaName.name CONTAINS 'a' 
+	AND ml.type = 'features'
+RETURN nPers.name, t.title
+	

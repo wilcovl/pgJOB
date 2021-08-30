@@ -1,0 +1,7 @@
+MATCH (t:title)-[:budget]->(mi:movieInfo),
+		(t)-[:votes]->(miIdx:movieInfoIdx),
+		(t)<-[:cast_info_movie]-(ci:cast_info)-[:cast_info_person]->(p:person)
+WHERE ci.note IN ['(producer)','(executive producer)']
+	AND p.gender = 'm'
+	AND p.name CONTAINS 'Tim'
+RETURN mi.info, miIdx.info, t.title

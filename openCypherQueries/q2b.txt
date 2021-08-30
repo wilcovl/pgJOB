@@ -1,0 +1,4 @@
+MATCH (n1:keyword)<-[:has_keyword]-(n2:title)-[]->(n3:company) 
+WHERE n1.keyword="character-name-in-title" 
+	AND n3.country_code="[nl]" 
+RETURN n2.title

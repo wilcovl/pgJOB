@@ -1,0 +1,5 @@
+MATCH((n2:company)<-[e1:`production companies`]-(n1:title)-[e2:`top 250 rank`]->(n3:movieInfoIdx)) 
+WHERE (NOT e1.note CONTAINS "(as Metro-Goldwyn-Mayer Pictures)") 
+	AND (e1.note CONTAINS "(co-production)" 
+		OR e1.note CONTAINS "(presents)") 
+RETURN e1.note, n1.title, n1.production_year

@@ -1,0 +1,8 @@
+MATCH (t:title)-[:`production companies`]->(c:company),
+		(t)-[:genres]->(mi:movieInfo),
+		(t)-[:rating]->(miIdx:movieInfoIdx)
+WHERE c.country_code = '[us]'
+	AND mi.info IN ['Drama','Horror','Western','Family']
+	AND miIdx.info > '7.0'
+	AND t.production_year >= 2000 AND t.production_year <= 2010
+RETURN c.name, miIdx.info, t.title

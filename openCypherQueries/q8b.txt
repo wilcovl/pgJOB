@@ -1,0 +1,10 @@
+MATCH (c:company)<-[eTitleComp]-(t:title)<-[:cast_info_movie]-(ci:cast_info)-[:cast_info_person]->(p:person)-[:aka_name]->(an:aka_name) 
+WHERE c.country_code='[jp]' 
+	AND eTitleComp.note CONTAINS '(Japan)' AND (NOT eTitleComp.note CONTAINS '(USA)') 
+	AND (eTitleComp.note CONTAINS '(2006)' OR eTitleComp.note CONTAINS '(2007)') 
+	AND ci.note='(voice: English version)' 
+	AND ci.role='actress' 
+	AND p.name CONTAINS 'Yo' AND (NOT p.name CONTAINS 'Yu') 
+	AND t.production_year >= 2006 AND t.production_year <= 2007 
+	AND (t.title STARTS WITH 'One Piece' OR t.title STARTS WITH 'Dragon Ball Z') 
+RETURN an.name, t.title

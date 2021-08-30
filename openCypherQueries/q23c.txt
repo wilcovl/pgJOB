@@ -1,0 +1,15 @@
+MATCH (t:title)-[]->(c:company),
+		(t)-[:has_keyword]->(:keyword),
+		(t)-[miEdge:`release dates`]->(mi:movieInfo),
+		(cc:complete_cast)-[:complete_cast_movie]->(t)
+WHERE cc.status = 'complete+verified'
+	AND c.country_code = '[us]'
+	AND t.kind IN ['movie',
+                  'tv movie',
+                  'video movie',
+                  'video game']
+	AND miEdge.note CONTAINS 'internet'
+	AND mi.info IS NOT NULL
+	AND (mi.info =~ 'USA:.* 199.*' OR mi.info =~ 'USA:.* 200.*')
+	AND t.production_year > 1990
+RETURN t.kind, t.title

@@ -1,0 +1,6 @@
+MATCH (t:title)-[]->(c:company), 
+		(t)-[:has_keyword]->(k:keyword), 
+		(t)<-[:cast_info_movie]-(ci:cast_info)-[:cast_info_person]->(:person)-[:aka_name]->(an:aka_name)
+WHERE c.country_code = '[us]'
+	AND k.keyword = 'character-name-in-title'
+RETURN an.name, t.title

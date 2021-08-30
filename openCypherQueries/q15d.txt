@@ -1,0 +1,8 @@
+MATCH (t:title)-[mc]->(c:company), 
+	(t)-[:has_keyword]->(k:keyword), 
+	(t)-[miEdge:`release dates`]->(mi:movieInfo), 
+	(t)-[:aka_title]->(at:aka_title)
+WHERE c.country_code='[us]'
+	AND miEdge.note CONTAINS 'internet'
+	AND t.production_year > 1990
+RETURN at.title, t.title

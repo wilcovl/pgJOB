@@ -1,0 +1,14 @@
+MATCH (t:title)-[:has_keyword]->(k:keyword),
+		(ci:cast_info)-[:cast_info_movie]->(t),
+		(ci)-[:cast_info_person]->(p:person),
+		(ci)-[:cast_info_character]->(ch:character),
+		(cc:complete_cast)-[:complete_cast_movie]->(t)
+WHERE cc.subject = 'cast'
+	AND cc.status CONTAINS 'complete'
+	AND (NOT ch.name CONTAINS 'Sherlock')
+	AND (ch.name =~ '.*Tony.*Stark.*' OR ch.name =~ '.*Iron.*Man.*')
+	AND k.keyword IN ['superhero','sequel','second-part','marvel-comics','based-on-comic','tv-special','fight','violence']
+	AND t.kind = 'movie'
+	AND p.name =~ '.*Downey.*Robert.*'
+	AND t.production_year > 2000
+RETURN t.title

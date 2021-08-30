@@ -1,0 +1,8 @@
+MATCH (t:title)-[:has_keyword]->(k:keyword), (t)-[:countries]->(mi:movieInfo), (t)-[:rating]->(miIdx:movieInfoIdx)
+WHERE k.keyword IS NOT NULL 
+	AND k.keyword IN ['murder','murder-in-title','blood','violence']
+	AND t.kind in ['movie','episode']
+	AND mi.info IN ['Sweden','Norway','Germany','Denmark','Swedish','Denish','Norwegian','German','USA','American']
+	AND miIdx.info < '8.5'
+	AND t.production_year > 2005
+RETURN miIdx.info, t.title

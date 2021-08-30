@@ -1,0 +1,4 @@
+MATCH (t:title)-[ml:movie_link]->(t2:title),
+		(t)-[:has_keyword]->(k:keyword)
+WHERE k.keyword = '10,000-mile-club'
+RETURN ml.type, t.title, t2.title

@@ -1,0 +1,5 @@
+MATCH (nInfo:movieInfo)<-[]-(nTitle:title)-[eProdComp:`production companies`]->(nComp:company) 
+WHERE nTitle.production_year>2010 
+	AND eProdComp.note CONTAINS '(VHS)' AND eProdComp.note CONTAINS '(USA)' AND eProdComp.note CONTAINS '(1994)' 
+	AND nInfo.info IN ['USA','America'] 
+RETURN nTitle.title

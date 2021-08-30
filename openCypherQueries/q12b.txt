@@ -1,0 +1,8 @@
+MATCH (t:title)-[:`production companies` | :distributors]->(c:company),
+		(t)-[:budget]->(mi:movieInfo),
+		(t)-[:`bottom 10 rank`]->(miIdx:movieInfoIdx)
+WHERE c.country_code = '[us]'
+	AND t.kind IS NOT NULL
+	AND t.production_year > 2000
+	AND (t.title STARTS WITH 'Birdemic' OR t.title CONTAINS 'Movie')
+RETURN mi.info, t.title

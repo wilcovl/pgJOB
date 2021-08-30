@@ -1,0 +1,15 @@
+MATCH (t1:title)-[lt:movie_link]->(t2:title),
+		(t1)-[]->(c1:company),
+		(t1)-[:rating]->(miIdx1:movieInfoIdx),
+		(t2)-[]->(c2:company),
+		(t2)-[:rating]->(miIdx2:movieInfoIdx)
+WHERE c1.country_code = '[us]'
+	AND t1.kind IN ['tv series']
+	AND t2.kind IN ['tv series']
+	AND lt.type IN ['sequel',
+                  'follows',
+                  'followed by']
+	AND miIdx2.info < '3.0'
+	AND t2.production_year >= 2005
+	AND t2.production_year <= 2008
+RETURN c1.name, c2.name, miIdx1.info, miIdx2.info, t1.title, t2.title

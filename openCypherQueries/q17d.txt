@@ -1,0 +1,6 @@
+MATCH (t:title)-[:has_keyword]->(k:keyword), 
+		(t)-[]->(c:company),
+		(t)<-[:cast_info_movie]-(:cast_info)-[:cast_info_person]->(p:person)
+WHERE k.keyword = 'character-name-in-title'
+	AND p.name CONTAINS 'Bert'
+RETURN p.name

@@ -1,0 +1,8 @@
+MATCH (c:company)<-[mc]-(t:title)-[:has_keyword]->(k:keyword), 
+		(t)-[lt:movie_link]->(:title) 
+WHERE c.country_code <> '[pl]' 
+	AND NOT(TYPE(mc) = 'production companies')
+	AND k.keyword IN ['sequel','revenge','based-on-novel']
+	AND mc.note IS NOT NULL
+	AND t.production_year > 1950
+RETURN c.name, mc.note, t.title

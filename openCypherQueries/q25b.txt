@@ -1,0 +1,20 @@
+MATCH (t:title)-[:has_keyword]->(k:keyword),
+		(t)-[:genres]->(mi:movieInfo),
+		(t)-[:votes]->(miIdx:movieInfoIdx),
+		(ci:cast_info)-[:cast_info_movie]->(t),
+		(ci)-[:cast_info_person]->(p:person)
+WHERE ci.note IN ['(writer)',
+                  '(head writer)',
+                  '(written by)',
+                  '(story)',
+                  '(story editor)']
+	AND k.keyword IN ['murder',
+                    'blood',
+                    'gore',
+                    'death',
+                    'female-nudity']
+	AND mi.info = 'Horror'
+	AND p.gender = 'm'
+	AND t.production_year > 2010
+	AND t.title STARTS WITH 'Vampire'
+RETURN mi.info, miIdx.info, p.name, t.title

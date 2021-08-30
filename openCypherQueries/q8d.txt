@@ -1,0 +1,4 @@
+MATCH (c:company)<-[eTitleComp]-(t:title)<-[:cast_info_movie]-(ci:cast_info)-[:cast_info_person]->(p:person)-[:aka_name]->(an:aka_name) 
+WHERE c.country_code='[us]' 
+	AND ci.role='costume designer' 
+RETURN an.name, t.title

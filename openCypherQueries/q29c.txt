@@ -1,0 +1,25 @@
+MATCH (t:title)-[mc]->(c:company),
+		(t)-[:has_keyword]->(k:keyword),
+		(cc:complete_cast)-[:complete_cast_movie]->(t),
+		(t)-[miEdge:`release dates`]->(mi:movieInfo),
+		(ci:cast_info)-[:cast_info_movie]->(t),
+		(ci)-[:cast_info_person]->(p:person),
+		(p)-[:aka_name]->(an:aka_name),
+		(p)-[:trivia]->(:personInfo),
+		(ci)-[:cast_info_character]->(ch:character)
+WHERE cc.subject = 'cast'
+	AND cc.status = 'complete+verified'
+	AND ci.note IN ['(voice)',
+                  '(voice: Japanese version)',
+                  '(voice) (uncredited)',
+                  '(voice: English version)']
+	AND c.country_code = '[us]'
+	AND k.keyword = 'computer-animation'
+	AND mi.info IS NOT NULL
+	AND (mi.info =~ 'Japan:.*200.*' OR mi.info =~ 'USA:.*200.*')
+	AND p.gender = 'f'
+	AND p.name CONTAINS 'An'
+	AND ci.role = 'actress'
+	AND t.production_year >= 2000
+	AND t.production_year <= 2010
+RETURN ch.name, p.name, t.title
