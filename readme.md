@@ -3,8 +3,8 @@
 This maven project contains the code to transform the relational data from the Join Order Benchmark (JOB)
 into a property graph instance.
 
-All queries of the JOB are manually translated into openCypher variants
-that can be executed against the property graph instance.
+All queries of the JOB have been manually translated into openCypher variants, and are also provided in this project. 
+These can be executed against the property graph instance.
 
 The property graph instance and openCypher queries are used in the experiments of:
 "A General Cardinality Estimation Framework for Subgraph Matching in Property Graphs."
