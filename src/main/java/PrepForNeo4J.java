@@ -536,7 +536,7 @@ public class PrepForNeo4J {
 
     public static void main(String[] args) throws Exception {
         if (CmdUtils.hasOption(args, "-dataDir")) {
-//            String baseLoc = "D:\\dataSets\\JOB\\join-order-benchmark_data\\";
+//            String dataDir = "D:\\JOB_data\\";
             String dataDir = CmdUtils.getOption(args, "-dataDir");
 
             String outDir = "";
