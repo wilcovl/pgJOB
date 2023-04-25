@@ -33,10 +33,10 @@ mvn exec:java -Dexec.mainClass=PrepForNeo4J -Dexec.args="-dataDir D:\\dataSets\\
 The generated property graph instance can be loaded into Neo4j.
 See for details: https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/
 
-- Place files of the property graph instance in the import folder of a Neo4j Database (Database should be newly created and not containing any data)
+- Place files of the property graph instance in the import folder of a Neo4j Database (Database should be newly created with name 'neo4j' and not containing any data)
 - Execute using the neo4j-admin.bat script:
 ```
-bin\neo4j-admin.bat import --database=neo4j --id-type=STRING --ignore-empty-strings --nodes=import/akaName.csv --nodes=import/akaTitle.csv --nodes=import/castInfoVertices.csv --nodes=import/character.csv --nodes=import/company_name.csv --nodes=import/complCastInfoVertices.csv --nodes=import/infoVertices.csv --nodes=import/keyword.csv --nodes=import/person.csv --nodes=import/personInfoVertices.csv --nodes=import/titles.csv --relationships=import/akaNameEdges.csv --relationships=import/akaTitleEdges.csv --relationships=import/castInfoEdges.csv --relationships=import/complCastInfoEdges.csv --relationships=import/episodeOfEdges.csv --relationships=import/infoEdges.csv --relationships=import/keywordEdges.csv --relationships=import/linkTypeEdges.csv --relationships=import/movie_companies.csv --relationships=import/personInfoEdges.csv
+bin\neo4j-admin.bat database import full --id-type=STRING --ignore-empty-strings --nodes=import/akaName.csv --nodes=import/akaTitle.csv --nodes=import/castInfoVertices.csv --nodes=import/character.csv --nodes=import/company_name.csv --nodes=import/complCastInfoVertices.csv --nodes=import/infoVertices.csv --nodes=import/keyword.csv --nodes=import/person.csv --nodes=import/personInfoVertices.csv --nodes=import/titles.csv --relationships=import/akaNameEdges.csv --relationships=import/akaTitleEdges.csv --relationships=import/castInfoEdges.csv --relationships=import/complCastInfoEdges.csv --relationships=import/episodeOfEdges.csv --relationships=import/infoEdges.csv --relationships=import/keywordEdges.csv --relationships=import/linkTypeEdges.csv --relationships=import/movie_companies.csv --relationships=import/personInfoEdges.csv neo4j
 ```
 
 ## Problems
